@@ -87,12 +87,12 @@ void loop() {
             // Turn led on
             gpio_put(col_pin, 0);
             gpio_put(row_pin, 1);
-            delayMicroseconds(40);
+            delayMicroseconds(10);
 
             // Turn led off
             gpio_put(col_pin, 1);
             gpio_put(row_pin, 0);
-            delayMicroseconds(10);
+            delayMicroseconds(40);
         }
     }
 }

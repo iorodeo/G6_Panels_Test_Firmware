@@ -1,3 +1,10 @@
+//
+// Hack of single led test for case where all leds on the PCB are reversed.
+//
+// Pulses specified led at 20kHz with an on time of approx. 10us.
+//
+//---------------------------------------------------------------------------
+#include <Streaming.h>
 #include "constants.h"
 #include "utilities.h"
 
@@ -6,7 +13,7 @@ void setup() {
     // If you want to use usb/serial communications
     //Serial.begin(115200);
 
-    // Initialize col pins, create mask and set to low
+    // Initialize col pins, create mask and set to high (reversed from normal)
     uint64_t COL_PIN_mask = 0;
     for (size_t i=0; i<COL_PIN.size(); i++) {
         gpio_init(COL_PIN(i));
@@ -15,7 +22,7 @@ void setup() {
     gpio_set_dir_out_masked64(COL_PIN_mask);
     gpio_set_mask64(COL_PIN_mask);
 
-    // Initialize row pins, create mask and set to high
+    // Initialize row pins, create mask and set to low  (reversed from normal)
     uint64_t ROW_PIN_mask = 0;
     for (size_t i=0; i<ROW_PIN.size(); i++) {
         gpio_init(ROW_PIN(i));
@@ -34,13 +41,14 @@ void loop() {
     static const uint8_t row = ROW_PIN[led_sch_index.first];
     static const uint8_t col = COL_PIN[led_sch_index.second];
 
-    // Turn led on
-    gpio_put(col,1);
-    gpio_put(row,0);
-    delayMicroseconds(10);
-
-    // Turn led off
+    // Turn led on  (reversed from normal)
     gpio_put(col,0);
     gpio_put(row,1);
+    delayMicroseconds(10);
+
+    // Turn led off (reversed from normal)
+    gpio_put(col,1);
+    gpio_put(row,0);
     delayMicroseconds(40);
+
 }

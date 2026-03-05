@@ -6,7 +6,7 @@ uint64_t ROW_PIN_mask = 0;
 
 void setup() {
 
-    Serial.begin(115200);  
+    Serial.begin(115200);
 
     // Initialize col pins, create mask and set to low
     for (size_t i=0; i<COL_PIN.size(); i++) {
@@ -16,7 +16,7 @@ void setup() {
     gpio_set_dir_out_masked64(COL_PIN_mask);
     gpio_clr_mask64(COL_PIN_mask);
 
-    // Initialize row pins, create mask and set to low 
+    // Initialize row pins, create mask and set to low
     for (size_t i=0; i<ROW_PIN.size(); i++) {
         gpio_init(ROW_PIN(i));
         ROW_PIN_mask |= (uint64_t(1) << ROW_PIN(i));
@@ -41,5 +41,3 @@ void loop() {
     delay(500);
     count++;
 }
-
-
