@@ -49,7 +49,13 @@ v0.1 has the LED polarity inverted compared to v0.2 and v0.3. The firmware accou
 
 ## Project Structure
 
-All firmware variants live under `test_firmware/single_led/`. Each variant is its own PlatformIO environment named `<behavior>_<revision>` (for example `pattern_v0_2`), composed from a hardware-revision profile (`[hw_v0_1]`, `[hw_v0_2]`, `[hw_v0_3]`) plus a per-revision `constants_<rev>.cpp` that defines the pin map and LED polarity levels. Shared logic — pixel helpers, schematic-to-layout maps — lives in `utilities.cpp`.
+All firmware variants live under `test_firmware/single_led/`. Source files are split by role:
+
+- `src/apps/`: one entrypoint per firmware behavior (`single_led.cpp`, `pattern.cpp`, `led_check.cpp`, `minimal.cpp`)
+- `src/board/`: shared `BoardConfig` selected by the PlatformIO hardware profile via `-DPANEL_HW_REV=<n>`
+- `src/common/`: shared panel I/O helpers and schematic/layout mapping
+
+Each revision-specific PlatformIO environment is still named `<behavior>_<revision>` (for example `pattern_v0_2`), but board selection now happens through build flags instead of swapping in revision-specific source files.
 
 ## License
 MIT
