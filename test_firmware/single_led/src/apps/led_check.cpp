@@ -8,6 +8,7 @@ static uint64_t row_mask = 0;
 
 namespace {
 
+// Drives every GPIO selected by the bitmask to the requested logic level.
 void write_mask_level(uint64_t mask, bool level) {
     if (level) {
         gpio_set_mask64(mask);
@@ -16,6 +17,8 @@ void write_mask_level(uint64_t mask, bool level) {
     }
 }
 
+// Switches the full panel between the revision-specific "all LEDs on" and
+// "all LEDs off" states by applying the proper row/column drive levels.
 void set_panel_state(bool on) {
     write_mask_level(col_mask, on ? BOARD_CONFIG.col_on_level : !BOARD_CONFIG.col_on_level);
     write_mask_level(row_mask, on ? BOARD_CONFIG.row_on_level : !BOARD_CONFIG.row_on_level);
@@ -23,6 +26,7 @@ void set_panel_state(bool on) {
 
 }  // namespace
 
+// Initializes the panel GPIOs and caches bitmasks for bulk row/column writes.
 void setup() {
     // Serial.begin(115200);
     panel_init_pins();
@@ -35,6 +39,8 @@ void setup() {
     }
 }
 
+// Alternates the whole panel on and off every 500 ms and reports the phase
+// count over serial.
 void loop() {
     static uint32_t count = 0;
 

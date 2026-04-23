@@ -2,6 +2,7 @@
 
 namespace {
 
+// Converts a schematic row/column coordinate into the panel's physical layout.
 Index convert_schematic_to_layout(Index schem_ind) {
     Index layout_ind;
     if (schem_ind.second % NUM_COLOR < NUM_COLOR / 2) {
@@ -24,6 +25,7 @@ Index convert_schematic_to_layout(Index schem_ind) {
     return layout_ind;
 }
 
+// Builds the lookup table from schematic coordinates to layout coordinates.
 IndexMap create_schematic_to_layout_map() {
     IndexMap map;
     for (uint8_t i = 0; i < PANEL_SIZE; i++) {
@@ -36,6 +38,7 @@ IndexMap create_schematic_to_layout_map() {
     return map;
 }
 
+// Builds the inverse lookup table from layout coordinates to schematic ones.
 IndexMap create_layout_to_schematic_map() {
     IndexMap map;
     for (uint8_t i = 0; i < PANEL_SIZE; i++) {

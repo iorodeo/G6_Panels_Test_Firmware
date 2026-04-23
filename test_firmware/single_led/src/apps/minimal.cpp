@@ -16,6 +16,7 @@ static uint64_t col_mask = 0;
 static uint64_t row_mask = 0;
 
 __attribute__((constructor))
+// Emits a visible boot pulse before Arduino or TinyUSB setup begins.
 static void pre_setup_blink() {
     gpio_init(0);
     gpio_set_dir(0, GPIO_OUT);
@@ -27,6 +28,7 @@ static void pre_setup_blink() {
     }
 }
 
+// Configures GPIO0..39 as two output banks used by the liveness probe.
 void setup() {
     for (uint8_t p = 0; p <= 19; ++p) {
         gpio_init(p);
@@ -40,6 +42,7 @@ void setup() {
     }
 }
 
+// Alternates the two GPIO banks so every LED blinks in one phase or the other.
 void loop() {
     gpio_set_mask64(col_mask);
     gpio_clr_mask64(row_mask);

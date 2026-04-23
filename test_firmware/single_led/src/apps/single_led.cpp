@@ -2,10 +2,12 @@
 #include "common/layout_map.h"
 #include "common/panel.h"
 
+// Initializes the panel GPIOs for the selected hardware revision.
 void setup() {
     panel_init_pins();
 }
 
+// Repeatedly strobes the LED at layout coordinate (0, 0).
 void loop() {
     static const Index led_index{0, 0};
     static const Index led_sch_index = LAYOUT_TO_SCHEMATIC_MAP.at(led_index);

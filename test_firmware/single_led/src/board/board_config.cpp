@@ -6,6 +6,7 @@
 
 namespace {
 
+// Selects the pin map and active drive levels for the chosen hardware revision.
 constexpr BoardConfig make_board_config() {
 #if PANEL_HW_REV == 1
     return {33,

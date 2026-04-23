@@ -4,6 +4,7 @@
 #include "common/layout_map.h"
 #include "common/panel.h"
 
+// Initializes serial output and the panel GPIOs for the selected board.
 void setup() {
     Serial.begin(115200);
     panel_init_pins();
@@ -33,6 +34,7 @@ static const Eigen::Matrix<uint8_t, PANEL_SIZE, PANEL_SIZE> pattern =
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
     ).finished();
 
+// Scans the pattern matrix and time-multiplexes every active LED.
 void loop() {
     for (uint8_t row = 0; row < PANEL_SIZE; row++) {
         for (uint8_t col = 0; col < PANEL_SIZE; col++) {
