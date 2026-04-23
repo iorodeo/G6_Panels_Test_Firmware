@@ -14,9 +14,15 @@ platforms = ["linux-64", "win-64", "osx-arm64", "osx-64"]
 "deploy-pattern-v0.1"    = { cmd = "pio run -e pattern_v0_1 --target upload",    cwd = "test_firmware/single_led" }
 "deploy-pattern-v0.2"    = { cmd = "pio run -e pattern_v0_2 --target upload",    cwd = "test_firmware/single_led" }
 "deploy-pattern-v0.3"    = { cmd = "pio run -e pattern_v0_3 --target upload",    cwd = "test_firmware/single_led" }
+"deploy-dot-v0.1"        = { cmd = "pio run -e dot_v0_1 --target upload",        cwd = "test_firmware/single_led" }
+"deploy-dot-v0.2"        = { cmd = "pio run -e dot_v0_2 --target upload",        cwd = "test_firmware/single_led" }
+"deploy-dot-v0.3"        = { cmd = "pio run -e dot_v0_3 --target upload",        cwd = "test_firmware/single_led" }
 "deploy-led-check-v0.1"  = { cmd = "pio run -e led_check_v0_1 --target upload",  cwd = "test_firmware/single_led" }
 "deploy-led-check-v0.2"  = { cmd = "pio run -e led_check_v0_2 --target upload",  cwd = "test_firmware/single_led" }
 "deploy-led-check-v0.3"  = { cmd = "pio run -e led_check_v0_3 --target upload",  cwd = "test_firmware/single_led" }
+"deploy-minimal-v0.1"    = { cmd = "pio run -e minimal_v0_1 --target upload",    cwd = "test_firmware/single_led" }
+"deploy-minimal-v0.2"    = { cmd = "pio run -e minimal_v0_2 --target upload",    cwd = "test_firmware/single_led" }
+"deploy-minimal-v0.3"    = { cmd = "pio run -e minimal_v0_3 --target upload",    cwd = "test_firmware/single_led" }
 deploy-minimal           = { cmd = "pio run -e minimal --target upload",         cwd = "test_firmware/single_led" }
 
 [tool.pixi.dependencies]
