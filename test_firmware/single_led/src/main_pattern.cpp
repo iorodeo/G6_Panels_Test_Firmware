@@ -4,7 +4,7 @@
 void setup() {
 
     // If you want to use usb/serial communications
-    //Serial.begin(115200);
+    Serial.begin(115200);
 
     // Initialize col pins, create mask and set to high (off)
     uint64_t COL_PIN_mask = 0;
