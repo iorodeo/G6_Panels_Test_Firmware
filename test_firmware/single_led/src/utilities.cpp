@@ -53,4 +53,29 @@ IndexMap create_layout_to_schematic_map() {
 }
 
 IndexMap SCHEMATIC_TO_LAYOUT_MAP = create_schematic_to_layout_map();
-IndexMap LAYOUT_TO_SCHEMATIC_MAP = create_layout_to_schematic_map();;
+IndexMap LAYOUT_TO_SCHEMATIC_MAP = create_layout_to_schematic_map();
+
+void panel_init_pins() {
+    uint64_t col_mask = 0;
+    for (size_t i = 0; i < COL_PIN.size(); i++) {
+        gpio_init(COL_PIN(i));
+        col_mask |= (uint64_t(1) << COL_PIN(i));
+    }
+    gpio_set_dir_out_masked64(col_mask);
+    if (COL_ON_LEVEL) gpio_clr_mask64(col_mask);
+    else              gpio_set_mask64(col_mask);
+
+    uint64_t row_mask = 0;
+    for (size_t i = 0; i < ROW_PIN.size(); i++) {
+        gpio_init(ROW_PIN(i));
+        row_mask |= (uint64_t(1) << ROW_PIN(i));
+    }
+    gpio_set_dir_out_masked64(row_mask);
+    if (ROW_ON_LEVEL) gpio_clr_mask64(row_mask);
+    else              gpio_set_mask64(row_mask);
+}
+
+void panel_set_pixel(uint8_t row_pin, uint8_t col_pin, bool on) {
+    gpio_put(col_pin, on ? COL_ON_LEVEL : !COL_ON_LEVEL);
+    gpio_put(row_pin, on ? ROW_ON_LEVEL : !ROW_ON_LEVEL);
+}
